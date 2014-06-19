@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 			options: {
 				separator: "\n/* ------------------- */\n"
 			},
-			dist: {
+			js: {
 				src: ["bower_components/jquery/dist/jquery.min.js",
 					  "bower_components/angular/angular.min.js",
 					  "bower_components/bootstrap/dist/js/bootstrap.min.js",
@@ -13,6 +13,12 @@ module.exports = function(grunt) {
 					  "app/frontend/js/controllers/*.js"
 					  ],
 				dest: "public/js/compiled.js"
+			},
+			css: {
+				src: ["bower_components/bootstrap/dist/css/bootstrap.min.css",
+					  "public/css/stylus.css"
+					 ],
+				dest: "public/css/compiled.css"
 			}
 		},
 		stylus: {
@@ -22,14 +28,14 @@ module.exports = function(grunt) {
 					compress: false
 				},
 				files: {
-					"public/css/compiled.css" : ["app/frontend/stylus/*.styl"]
+					"public/css/stylus.css" : ["app/frontend/stylus/*.styl"]
 				}
 			}
 		},
 		watch: {
 			stylesheets: {
 				files: "app/frontend/**/*.styl",
-				tasks: ["stylus"]
+				tasks: ["stylus", "concat"]
 			},
 			scripts: {
 				files: "app/frontend/**/*.js",
@@ -42,5 +48,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
-	grunt.registerTask("default", ["concat", "stylus"]);
+	grunt.registerTask("default", ["stylus", "concat"]);
 }
