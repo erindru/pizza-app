@@ -20,22 +20,27 @@ angular.module("pizza-app").controller("MainController", function($scope, $http,
 
 	$scope.step = 1;
 
-	$scope.sizeSelected = function() {
-		$scope.step = ($scope.order.pizza_size) ? 2 : 1;
+	$scope.selectSize = function(size) {
+		if (size) {
+			$scope.order.pizza_size = size;
+		}
+		$scope.step = (size) ? 2 : 1;
 	}
 
-	$scope.baseSelected = function() {
-		$scope.step = ($scope.order.pizza_base) ? 3 : 2;
+	$scope.selectBase = function(base) {
+		if (base) {
+			$scope.order.pizza_base = base;
+		}
+		$scope.step = (base) ? 3 : 2;
 	}
 
-	$scope.addTopping = function() {
-		var current = $scope.order.current_topping;
-
-		if (current) {
-			if ($scope.order.pizza_toppings.indexOf(current) == -1) {
-				$scope.order.pizza_toppings.push(current);
+	$scope.addTopping = function(topping) {
+		if (topping) {
+			if ($scope.order.pizza_toppings.indexOf(topping) == -1) {
+				$scope.order.pizza_toppings.push(topping);
 			}
 		}
+		$scope.step = (topping) ? 4 : 3;
 	}
 
 	$scope.total = function() {

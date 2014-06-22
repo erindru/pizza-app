@@ -6,7 +6,7 @@
 	</head>
 	<body ng-controller="MainController">
 		<div id="main" class="container">
-			<h1>Outrageously Good Pizzas</h1>
+			<h1 id="title">Outrageously Good Pizzas</h1>
 			<div ng-if="step >= 1">
 				<h2>Choose your size!</h2>
 				<select ng-model="order.pizza_size" ng-options="size.name + ' ($' + size.price + ')' for size in sizes" ng-change="sizeSelected()">
@@ -29,7 +29,7 @@
 					{{ topping.name }}
 				</div>
 			</div>
-			<h3>Total: {{ total() }}</h3>
+			<h3 id="total">Total: {{ total() }}</h3>
 		</div>
 		<script type="text/javascript" src="<?= URL::asset('js/compiled.js') ?>"></script>
 	</body>
