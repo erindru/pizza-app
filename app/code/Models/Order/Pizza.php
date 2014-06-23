@@ -1,0 +1,29 @@
+<?php
+
+namespace Pizza\Models\Order;
+
+class Pizza extends \Eloquent {
+
+	protected $table = "orders_pizzas";
+
+	protected $fillable = array("pizza_size_id", "pizza_base_id");
+
+	public $timestamps = false;
+
+	public function order() {
+		return $this->belongsTo("Pizza\Models\Order\Order");
+	}
+
+	public function size() {
+		return $this->belongsTo("Pizza\Models\Pizza\PizzaSize", "pizza_size_id");
+	}
+
+	public function base() {
+		return $this->belongsTo("Pizza\Models\Pizza\PizzaBase", "pizza_base_id");
+	}
+
+	public function toppings() {
+		return $this->belongsToMany("Pizza\Models\Pizza\PizzaTopping", "orders_pizzas_toppings", "pizza_topping_id", "pizza_id");
+	}
+
+}

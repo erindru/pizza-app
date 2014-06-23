@@ -34,20 +34,32 @@ class Initial extends Migration {
 			$table->increments("id");
 			$table->timestamps();
 
-			$table->integer("pizza_size_id")->unsigned()->nullable();
-			$table->integer("pizza_base_id")->unsigned()->nullable();
+			$table->string("customer_name", 255)->nullable();
+			$table->string("customer_address", 1024)->nullable();
 
-			$table->foreign("pizza_size_id")->references("id")->on("pizza_sizes")->onDelete("cascade");
-			$table->foreign("pizza_base_id")->references("id")->on("pizza_bases")->onDelete("cascade");
+			$table->boolean("delivered")->default(false);
+			$table->timestamp("delivered_on")->nullable();
 		});
 
-		Schema::create("orders_toppings", function($table) {
+		Schema::create("orders_pizzas", function($table) {
 			$table->increments("id");
 
 			$table->integer("order_id")->unsigned();
+			$table->integer("pizza_size_id")->unsigned()->nullable();
+			$table->integer("pizza_base_id")->unsigned()->nullable();
+
+			$table->foreign("order_id")->references("id")->on("orders")->onDelete("cascade");
+			$table->foreign("pizza_size_id")->references("id")->on("pizza_sizes")->onDelete("restrict");
+			$table->foreign("pizza_base_id")->references("id")->on("pizza_bases")->onDelete("restrict");
+		});
+
+		Schema::create("orders_pizzas_toppings", function($table) {
+			$table->increments("id");
+
+			$table->integer("pizza_id")->unsigned();
 			$table->integer("pizza_topping_id")->unsigned();
 
-			$table->foreign("pizza_topping_id")->references("id")->on("pizza_toppings")->onDelete("cascade");
+			$table->foreign("pizza_topping_id")->references("id")->on("pizza_toppings")->onDelete("restrict");
 		});
 
 	}
@@ -58,7 +70,8 @@ class Initial extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::dropIfExists("orders_toppings");
+		Schema::dropIfExists("orders_pizzas_toppings");
+		Schema::dropIfExists("orders_pizzas");
 		Schema::dropIfExists("orders");
 		Schema::dropIfExists("pizza_toppings");
 		Schema::dropIfExists("pizza_bases");
