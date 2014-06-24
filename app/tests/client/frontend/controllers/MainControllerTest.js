@@ -20,12 +20,7 @@ describe("Test MainController", function() {
 
 	it("should start with an unpopulated order", function() {
 		expect(scope.order).toBeDefined();
-		expect(scope.order.pizza_size).toBeDefined();
-		expect(scope.order.pizza_base).toBeDefined();
-		expect(scope.order.pizza_toppings).toBeDefined();
-
-		expect(scope.order.pizza_size.price).toBe(0);
-		expect(scope.order.pizza_base.price).toBe(0);
+		expect(scope.order.pizzas).toBeDefined();
 	});
 
 	it("should populate sizes on load", function() {
@@ -43,52 +38,52 @@ describe("Test MainController", function() {
 		expect(scope.toppings).toEqual(mock_toppings);
 	});
 
-	it("should start at step 1", function() {
-		expect(scope.step).toBe(1);
+	it("should be able to add a pizza", function() {
+		scope.addPizza();
+
+		expect(scope.order.pizzas.length).toBe(1);
+		expect(scope.order.pizzas[0].size).toBeDefined();
+		expect(scope.order.pizzas[0].size.price).toBe(0);
+		expect(scope.order.pizzas[0].base.price).toBe(0);
+		expect(scope.order.pizzas[0].toppings).toBeDefined();
+		expect(scope.order.pizzas[0].toppings.length).toBe(0);
 	});
 
-	it("should correctly change the state when a size is selected", function() {
-		scope.selectSize(mock_sizes[0]);
+	it("should produce a correct total for a pizza", function() {
+		httpBackend.flush();
 
-		expect(scope.order.pizza_size).toEqual(mock_sizes[0]);
-		expect(scope.step).toBe(2);
+		scope.addPizza();
+		var pizza = scope.order.pizzas[0];
+
+		pizza.size = scope.sizes[0]; /* 2.10 */
+		pizza.base = scope.bases[0]; /* 1.30 */
+		pizza.toppings.push(scope.toppings[0]); /* 1.40 */
+		pizza.toppings.push(scope.toppings[1]); /* 1.90 */
+
+		expect(scope.totalForPizza(pizza)).toEqual("6.70");
 	});
 
-	it("should correctly change the state when a size is selected", function() {
-		scope.selectBase(mock_bases[0]);
+	it("should produce a correct total for multiple pizzas", function() {
+		httpBackend.flush();
 
-		expect(scope.order.pizza_base).toEqual(mock_bases[0]);
-		expect(scope.step).toBe(3);
+		scope.addPizza();
+		var pizza = scope.order.pizzas[0];
+
+		pizza.size = scope.sizes[0]; /* 2.10 */
+		pizza.base = scope.bases[0]; /* 1.30 */
+		pizza.toppings.push(scope.toppings[0]); /* 1.40 */
+		pizza.toppings.push(scope.toppings[1]); /* 1.90 */
+
+		scope.addPizza();
+		var pizza1 = scope.order.pizzas[1];
+
+		pizza1.size = scope.sizes[1]; /* 2.90 */
+		pizza1.base = scope.bases[1]; /* 1.70 */
+		pizza1.toppings.push(scope.toppings[2]); /* 1.70 */
+		pizza1.toppings.push(scope.toppings[3]); /* 1.65 */
+
+		expect(scope.total()).toEqual("14.65");
 	});
 
-	it("should correctly change the state when a topping is added", function() {
-		scope.addTopping(mock_toppings[0]);
-
-		expect(scope.order.pizza_toppings.length).toBe(1);
-		expect(scope.order.pizza_toppings[0]).toEqual(mock_toppings[0]);
-		expect(scope.step).toBe(4);
-
-		scope.addTopping(mock_toppings[1]);
-		expect(scope.order.pizza_toppings.length).toBe(2);
-		expect(scope.order.pizza_toppings[0]).toEqual(mock_toppings[0]);
-		expect(scope.order.pizza_toppings[1]).toEqual(mock_toppings[1]);
-		expect(scope.step).toBe(4);
-	});
-
-	it("should not add the same topping more than once", function() {
-		scope.addTopping(mock_toppings[0]);
-		scope.addTopping(mock_toppings[0]);
-
-		expect(scope.order.pizza_toppings.length).toBe(1);
-	});
-
-	it("should correctly calculate the total", function() {
-		scope.selectSize(mock_sizes[0]); /* 2.10 */
-		scope.selectBase(mock_bases[0]); /* 1.30 */
-		scope.addTopping(mock_toppings[0]); /* 1.40 */
-		scope.addTopping(mock_toppings[1]); /* 1.90 */
-
-		expect(scope.total()).toEqual("6.70");
-	});
 
 });

@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-md-12"><h2>Admin</h2></div>
+	<div class="col-md-4" ng-if="!authenticated">
+		<p>You need to authenticate. Please enter your password.</p>
+		<input type="password" ng-model="password" class="form-control" />
+		<span class="text-danger" ng-if="error">{{ error }}</span><br />
+		<a class="btn btn-primary btn-xs" ng-click="authenticate(password)">Authenticate</a>
+	</div>
+	<div class="col-md-12" ng-if="authenticated">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<strong>Orders</strong>
+					<a class="pull-right" href="" ng-click="loadOrders()">Refresh</a>
+				</h3>
+			</div>
+			<div class="panel-body">
+				<table class="table table-condensed orders">
+					<tr>
+						<th>Date</th>
+						<th>Customer</th>
+						<th>Pizzas</th>
+						<th>Price</th>
+						<th>Action</th>
+					</tr>
+					<tr ng-repeat="order in orders">
+						<td>{{ order.created_at }}</td>
+						<td>
+							<p>{{ order.customer_name }}</p>
+							<p>{{ order.customer_address }}</p>
+						</td>
+						<td>
+							<ul>
+								<li ng-repeat="pizza in order.pizzas">
+									<h3>Pizza {{ $index + 1 }}</h3>
+									<strong>Size:</strong> {{ pizza.size.name }}<br />
+									<strong>Base:</strong>  {{ pizza.base.name }}<br />
+									<strong>Toppings:</strong><br />
+									<ul>
+										<li ng-repeat="topping in pizza.toppings">{{ topping.name }}</li>
+									</ul>
+								</li>
+							</ul>
+						</td>
+						<td>
+							{{ pizza.price }}
+						</td>
+						<td>
+							<a class="btn btn-danger" href="" ng-click="removeOrder(order)">Delete</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

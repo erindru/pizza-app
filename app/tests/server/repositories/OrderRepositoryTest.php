@@ -35,6 +35,10 @@ class OrderRepositoryTest extends TestCase {
 
 		$this->assertEquals("Test Customer", $order->customer_name);
 		$this->assertEquals("Test Address", $order->customer_address);
+
+		$order = $this->repo->getOrder($order->id);
+		$this->assertEquals("Test Customer", $order->customer_name);
+		$this->assertEquals("Test Address", $order->customer_address);
 	}
 
 }

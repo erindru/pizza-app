@@ -17,6 +17,9 @@ class OrderControllerTest extends TestCase {
 
 		$this->repo->shouldReceive("addOrder")->once();
 		$response = $this->call("POST", "/orders", array(), array(), array(), $test_order);
+		$data = $response->getData(true);
+
+		$this->assertArrayHasKey("order", $data);
 	}
 
 	private function mockOrderRepository() {

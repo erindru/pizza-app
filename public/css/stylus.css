@@ -1,3 +1,23 @@
+.orders ul {
+  list-style: none;
+  padding-left: 0;
+}
+.orders ul li {
+  margin-bottom: 10px;
+}
+.orders ul li ul {
+  padding-left: 10px;
+}
+.orders ul li ul li {
+  margin-bottom: 0;
+}
+.orders h3 {
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 5px;
+  text-decoration: underline;
+}
+
 #main h1 {
   text-align: center;
   margin-bottom: 20px;

@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 			js: {
 				src: ["bower_components/jquery/dist/jquery.min.js",
 					  "bower_components/angular/angular.min.js",
+					  "bower_components/angular-route/angular-route.min.js",
 					  "bower_components/bootstrap/dist/js/bootstrap.min.js",
 					  "app/frontend/js/main.js",
 					  "app/frontend/js/controllers/*.js"
@@ -32,6 +33,14 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		copy: {
+			main: {
+				src: "app/frontend/views/*.html",
+				dest: "public/views/",
+				flatten: true,
+				expand: true
+			}
+		},
 		watch: {
 			stylesheets: {
 				files: "app/frontend/**/*.styl",
@@ -40,6 +49,10 @@ module.exports = function(grunt) {
 			scripts: {
 				files: "app/frontend/**/*.js",
 				tasks: ["concat"]
+			},
+			views: {
+				files: "app/frontend/views/*.html",
+				tasks: ["copy"]
 			}
 		}
 	});
@@ -47,6 +60,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
-	grunt.registerTask("default", ["stylus", "concat"]);
+	grunt.registerTask("default", ["stylus", "concat", "copy"]);
 }

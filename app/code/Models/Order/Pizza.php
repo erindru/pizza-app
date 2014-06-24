@@ -23,7 +23,7 @@ class Pizza extends \Eloquent {
 	}
 
 	public function toppings() {
-		return $this->belongsToMany("Pizza\Models\Pizza\PizzaTopping", "orders_pizzas_toppings", "pizza_topping_id", "pizza_id");
+		return $this->belongsToMany("Pizza\Models\Pizza\PizzaTopping", "orders_pizzas_toppings", "pizza_id", "pizza_topping_id");
 	}
 
 }

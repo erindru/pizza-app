@@ -10,6 +10,10 @@ use Pizza\Models\Pizza\PizzaTopping;
 
 class OrderRepository {
 
+	public function getOrder($id) {
+		return Order::find($id);
+	}
+
 	public function addOrder(array $data) {
 		$order = new Order();
 		$order->customer_name = $data["customer_name"];
@@ -28,7 +32,9 @@ class OrderRepository {
 
 			foreach ($pizza["toppings"] as $topping) {
 				$topping = PizzaTopping::find($topping["id"]);
-				$db_pizza->toppings()->attach($topping);
+				if ($topping) {
+					$db_pizza->toppings()->attach($topping);
+				}
 			}
 
 			$db_pizza->save();
@@ -38,14 +44,12 @@ class OrderRepository {
 		return $order;
 	}
 
-	public function markOrderDelivered(Order $order) {
-		$order->delivered = true;
-		$order->delivered_on = Carbon::now();
-		$order->save();
+	public function deleteOrder(Order $order) {
+		return $order->delete();
 	}
 
 	public function getAllOrders() {
-		return Order::with(array("pizzas", "pizzas.size", "pizzas.base", "pizzas.toppings"))->get();
+		return Order::with(array("pizzas", "pizzas.size", "pizzas.base", "pizzas.toppings"))->orderBy("created_at", "desc")->get();
 	}
 
 }
