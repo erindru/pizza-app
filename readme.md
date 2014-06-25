@@ -18,8 +18,8 @@ Additionally, I have a version installed and running at http://pizza-app.liquid-
 
 1. Make sure `composer` is installed. Also, make sure the php mcrypt (`php5-mcrypt` on ubuntu) extension is installed.
 1. Clone this repo
-1. Run `composer install` to pull in Laravel and other PHP dependencies
 1. Modify `sample.env.php` with your mysql details and then rename it to `.env.php`
+1. Run `composer install` to pull in Laravel and other PHP dependencies
 1. Run `php artisan migrate --seed` to create the db tables and seed sample data
 1. Configure an apache vhost to point to the `public` directory. Alternatively, for a quick and easy webserver, run `php artisan serve`
 
@@ -53,6 +53,6 @@ Note: The tests are not complete, I have implemented a few of each type to demon
 
 # Things to do as an "admin" user
 
-- Enter the "admin" section by clicking "Admin" on the bottom right. Immediately, you need to authenticate. The password is "thebestpasswordintheworld". Note that this password is checked server side and must be included in every query for sensitive data, like the order list and deleting a order. You can prevent people sniffing it by serving the site over SSL.
+- Enter the "admin" section by clicking "Admin" on the top right. Immediately, you need to authenticate. The password is "thebestpasswordintheworld". Note that this password is checked server side and must be included in every query for sensitive data, like the order list and deleting a order. You can prevent people sniffing it by serving the site over SSL.
 - Once you have authenticated successfully, a list of orders is shown, sorted by newest first. You can see the full details of the orders here. Click "Delete" to delete one, and notice that your prompted to confirm it. Once its deleted, the list will refresh.
 - Also notice that when you refresh the page, you have to enter your password again. This would get very annoying for an actual user very quickly, so theres a "Refresh" button on the top right that refreshes the list without refreshing the page. You can verify it works by submitting an order in another tab, and then clicking it.

@@ -6,9 +6,10 @@
 	</head>
 	<body>
 		<div id="main" class="container">
+			<a class="pull-right" href="#/admin">Admin</a>
 			<h1 id="title"><a href="<?= URL::to("/"); ?>">Extremely Simple Pizzas</a></h1>
 			<div ng-view></div>
-			<a class="pull-right" href="#/admin">Admin</a>
+			<div class="clearfix"></div>
 		</div>
 		<script type="text/javascript" src="<?= URL::asset('js/compiled.js') ?>"></script>
 		<script type="text/javascript">
