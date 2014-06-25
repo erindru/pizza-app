@@ -6,6 +6,7 @@ angular.module("pizza-app").controller("AdminController", function(BASE_URL, $sc
 			console.log(data);
 			if (data.data.valid) {
 				$scope.authenticated = true;
+				$scope.password = password;
 				$scope.loadOrders();
 			} else {
 				$scope.error = "Incorrect password, please try again.";
