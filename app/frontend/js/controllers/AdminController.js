@@ -3,7 +3,6 @@ angular.module("pizza-app").controller("AdminController", function(BASE_URL, $sc
 	$scope.authenticate = function(password) {
 		$scope.error = "";
 		$http.post(BASE_URL + "/orders/validate-password", { password : password }).then(function(data) {
-			console.log(data);
 			if (data.data.valid) {
 				$scope.authenticated = true;
 				$scope.password = password;

@@ -8,6 +8,8 @@ class Pizza extends \Eloquent {
 
 	protected $fillable = array("pizza_size_id", "pizza_base_id");
 
+	protected $appends = array("price");
+
 	public $timestamps = false;
 
 	public function order() {
@@ -24,6 +26,14 @@ class Pizza extends \Eloquent {
 
 	public function toppings() {
 		return $this->belongsToMany("Pizza\Models\Pizza\PizzaTopping", "orders_pizzas_toppings", "pizza_id", "pizza_topping_id");
+	}
+
+	public function getPriceAttribute() {
+		$price = $this->size->price + $this->base->price;
+		$this->toppings->each(function($topping) use (&$price) {
+			$price += $topping->price;
+		});
+		return number_format($price, 2);
 	}
 
 }

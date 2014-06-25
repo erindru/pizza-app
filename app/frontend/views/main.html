@@ -86,7 +86,7 @@
 			</p>
 		</div>
 	</div>
-	<a ng-if="hasCompletedPizzas() && step == 1" class="btn btn-success pull-right" href="" ng-click="advanceToDeliveryDetails()">I am happy with my order!</a>
+	<a id="happy-with-order" ng-if="hasCompletedPizzas() && step == 1" class="btn btn-success pull-right" href="" ng-click="advanceToDeliveryDetails()">I am happy with my order!</a>
 	<a ng-if="hasCompletedDeliveryDetails() && step == 2" class="btn btn-success pull-right" href="" ng-click="submitOrder()">Send me my pizza!</a>
 	<img class="loader pull-right" ng-if="submitting" src="images/ajax-loader.gif" />
 </div>
