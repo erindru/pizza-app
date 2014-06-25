@@ -1,7 +1,5 @@
 var app = angular.module("pizza-app", ["ngRoute"]);
 
-app.constant("BASE_URL", "/pizza-app/public/");
-
 app.config(function($routeProvider) {
 
 	$routeProvider.when("/", {

@@ -16,20 +16,20 @@ I have committed the compiled assets to this repo in order to get the project up
 Additionally, I have a version installed and running at http://pizza-app.liquid-awesome.net in case you have difficulties getting it running (I am assuming that
  this toolchain is unfamiliar to you)
 
-1. Make sure `composer` is installed
+1. Make sure `composer` is installed. Also, make sure the php mcrypt (`php5-mcrypt` on ubuntu) extension is installed.
 1. Clone this repo
 1. Run `composer install` to pull in Laravel and other PHP dependencies
 1. Modify `sample.env.php` with your mysql details and then rename it to `.env.php`
-1. Run `php artisan migrate` to create the db tables
+1. Run `php artisan migrate --seed` to create the db tables and seed sample data
 1. Configure an apache vhost to point to the `public` directory. Alternatively, for a quick and easy webserver, run `php artisan serve`
 
 # Installation for dev
 
 1. Follow the "Installation just to get it running" task above
-1. Make sure you have `npm`, `grunt`, `bower`, `karma`, `protractor` and `composer` installed. Grunt, Karma and Bower can be installed globally with `npm install -g karma-cli grunt-cli bower protractor`. Follow the guide on https://getcomposer.org/download/ for Composer.
+1. Make sure you have `npm`, `grunt`, `bower`, `karma`, `protractor` and `composer` installed. Grunt, Karma, Protractor and Bower can be installed globally with `npm install -g karma-cli grunt-cli bower protractor`. Follow the guide on https://getcomposer.org/download/ for Composer.
 1. Clone this repo
 1. Run `composer install`, `bower install` and `npm install`
-1. Run `grunt`
+1. Run `grunt` and then `grunt watch` and start editing files
 
 # Running the tests
 

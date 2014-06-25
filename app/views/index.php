@@ -11,5 +11,8 @@
 			<a class="pull-right" href="#/admin">Admin</a>
 		</div>
 		<script type="text/javascript" src="<?= URL::asset('js/compiled.js') ?>"></script>
+		<script type="text/javascript">
+			angular.module("pizza-app").constant("BASE_URL", "<?= URL::to('/'); ?>");
+		</script>
 	</body>
 </html>
