@@ -389,7 +389,6 @@ angular.module("pizza-app").controller("MainController", function($scope, $http,
 		$scope.submitting = true;
 		$http.post(BASE_URL + "/orders", $scope.order).success(function(data) {
 			$scope.submitting = false;
-			console.log(data);
 			if (data.success) {
 				$scope.step = 3;
 			} else {
