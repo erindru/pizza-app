@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div id="main" class="container">
-			<h1 id="title"><a href="<?= URL::to("/"); ?>">Extremely Simple Pizzas</h1>
+			<h1 id="title"><a href="<?= URL::to("/"); ?>">Extremely Simple Pizzas</a></h1>
 			<div ng-view></div>
 			<a class="pull-right" href="#/admin">Admin</a>
 		</div>
