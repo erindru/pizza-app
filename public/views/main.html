@@ -3,12 +3,12 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<strong>Your Order</strong>
-				<span class="pull-right"><strong>Total Cost:</strong> ${{ total() }}</span>
+				<span id="total" class="pull-right"><strong>Total Cost:</strong> ${{ total() }}</span>
 			</h3>
 		</div>
 		<div class="panel-body" ng-if="step == 1">
 			<p ng-if="!order.pizzas.length">Please click the below button to add a pizza to your order.</p>
-			<a class="btn btn-primary" href="" ng-click="addPizza()"><i class="glyphicon glyphicon-plus"></i> Add Pizza</a>
+			<a id="add-pizza" class="btn btn-primary" href="" ng-click="addPizza()"><i class="glyphicon glyphicon-plus"></i> Add Pizza</a>
 			<table id="pizzas" class="table table-condensed" ng-if="order.pizzas.length">
 				<tr>
 					<th>&nbsp;</th>
